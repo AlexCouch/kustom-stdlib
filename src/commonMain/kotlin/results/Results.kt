@@ -2,9 +2,9 @@ package results
 
 import buildPrettyString
 
-abstract class Result(open val message: String)
+abstract class Result<T>(open val message: String)
 
-class OKResult(override val message: String = ""): Result(""){
+class OKResult(override val message: String = ""): Result<Nothing>(""){
     override fun toString(): String {
         return buildPrettyString {
             this.appendWithNewLine("ErrorResult{")
@@ -15,7 +15,7 @@ class OKResult(override val message: String = ""): Result(""){
         }
     }
 }
-class WrappedResult<T>(override val message: String = "", val t: T): Result(message){
+class WrappedResult<T>(override val message: String = "", val t: T): Result<T>(message){
     override fun toString(): String {
         return buildPrettyString {
             this.appendWithNewLine("ErrorResult{")
@@ -27,7 +27,7 @@ class WrappedResult<T>(override val message: String = "", val t: T): Result(mess
         }
     }
 }
-class ErrorResult(override val message: String, val cause: ErrorResult?): Result(message){
+class ErrorResult(override val message: String, val cause: ErrorResult?): Result<Nothing>(message){
     override fun toString(): String {
         return buildPrettyString {
             this.appendWithNewLine("ErrorResult{")
