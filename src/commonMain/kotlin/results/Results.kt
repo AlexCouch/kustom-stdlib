@@ -2,40 +2,19 @@ package results
 
 import buildPrettyString
 
-abstract class Result<T>(open val message: String)
+interface Result<T>
 
-class OKResult(override val message: String = ""): Result<Nothing>(""){
-    override fun toString(): String {
-        return buildPrettyString {
-            this.appendWithNewLine("ErrorResult{")
-            this.indent {
-                this.appendWithNewLine("Message: $message")
-            }
-            this.appendWithNewLine("}")
-        }
-    }
-}
-class WrappedResult<T>(override val message: String = "", val t: T): Result<T>(message){
-    override fun toString(): String {
-        return buildPrettyString {
-            this.appendWithNewLine("ErrorResult{")
-            this.indent {
-                this.appendWithNewLine("Message: $message")
-                this.append("Wrapped Object: $t")
-            }
-            this.appendWithNewLine("}")
-        }
-    }
-}
-class ErrorResult(override val message: String, val cause: ErrorResult?): Result<Nothing>(message){
+class OKResult<T>: Result<T>
+class WrappedResult<T>(val t: T): Result<T>
+class ErrorResult<T>(val message: String, val cause: ErrorResult<*>? = null): Result<T>{
     override fun toString(): String {
         return buildPrettyString {
             this.appendWithNewLine("ErrorResult{")
             this.indent {
                 this.appendWithNewLine("Error Message: $message")
-                this.append("Cause: $cause")
+                this.appendWithNewLine("Cause: $cause")
             }
-            this.appendWithNewLine("}")
+            this.append("}")
         }
     }
 }

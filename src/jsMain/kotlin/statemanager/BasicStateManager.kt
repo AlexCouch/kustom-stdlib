@@ -9,7 +9,7 @@ import results.Result
 actual abstract class BasicStateManager<T> : StateManager<BasicState<T>> {
     actual override val stateStack: ArrayList<StateStackEntry> = arrayListOf()
     internal actual abstract val module: T
-    actual suspend fun start(): Result {
+    actual suspend fun start(): Result<T> {
         val stateStackFlow = flow{
 //            println("Starting state transition")
             while(!finalStates.contains(currentState)) {

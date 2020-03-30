@@ -12,7 +12,7 @@ actual abstract class BasicStateManager<T>: StateManager<BasicState<T>> {
     internal actual abstract val module: T
 
     @InternalCoroutinesApi
-    actual suspend fun start(): Result{
+    actual suspend fun start(): Result<T>{
         val stateStackFlow = flow{
 //            println("Starting state transition")
             while(!finalStates.contains(currentState)) {
