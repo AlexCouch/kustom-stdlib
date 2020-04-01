@@ -1,3 +1,16 @@
+expect object PrettyColors{
+    val RESET: String
+    val RED: String
+    val BLUE: String
+    val GREEN: String
+    val YELLOW: String
+    val WHITE: String
+    val BLACK: String
+    val UNDERLINE: String
+    val BOLD: String
+    val ITALIC: String
+}
+
 class PrettyPrinter{
     private var indentationLevel = 0
     private val sb = StringBuilder()
@@ -23,6 +36,60 @@ class PrettyPrinter{
         }else{
             this.sb.append(string)
         }
+    }
+
+    fun red(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.RED)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun green(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.GREEN)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun blue(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.BLUE)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun yellow(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.YELLOW)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun white(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.WHITE)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun black(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.BLACK)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun bold(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.BOLD)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun italics(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.ITALIC)
+        this.block()
+        this.append(PrettyColors.RESET)
+    }
+
+    fun underline(block: PrettyPrinter.()->Unit){
+        this.append(PrettyColors.UNDERLINE)
+        this.block()
+        this.append(PrettyColors.RESET)
     }
 
     fun appendWithNewLine(string: String){
