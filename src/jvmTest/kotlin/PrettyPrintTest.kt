@@ -3,6 +3,18 @@ import kotlin.test.Test
 
 class PrettyPrintTest{
     @Test
+    fun redBold(){
+        println(buildPrettyString {
+            this.red {
+                this.appendWithNewLine("Just red")
+                this.bold {
+                    this.appendWithNewLine("Red and bold!")
+                }
+            }
+        })
+    }
+
+    @Test
     fun test(){
         println(buildPrettyString {
             this.red {
