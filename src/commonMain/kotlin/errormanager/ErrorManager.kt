@@ -12,11 +12,15 @@ abstract class ErrorManager<T>{
 
     abstract val module: T
 
+    var hasError = false
+        private set
+
     @ExperimentalCoroutinesApi
     fun start(){
         GlobalScope.launch {
             while(!errorStream.isClosedForSend){
                 val errorEntry = errorStream.receive()
+                hasError = true
                 val (moduleName, message) = errorEntry
                 val errorMessage = buildPrettyString {
                     this.appendWithNewLine("An error occurred in $moduleName:")
